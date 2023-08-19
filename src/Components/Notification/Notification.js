@@ -42,7 +42,7 @@ function Notification() {
             <button className="login-btn" onClick={handleLogout}>
               Logout
             </button>
-            <button className="login-btn">{authContext.username}</button>
+            <button className="login-btn">{authContext.email}</button>
             <Link to="/post">
               <button className="login-btn">Feed</button>
             </Link>

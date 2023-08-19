@@ -5,7 +5,6 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState('');
-  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -18,7 +17,7 @@ const AuthProvider = ({ children }) => {
     // Perform logout logic here
     setIsLoggedIn(false);
     setToken('');
-    setUsername('');
+    setEmail('');
     setPassword('');
   };
 
@@ -32,16 +31,12 @@ const AuthProvider = ({ children }) => {
     setEmail(givenEmail);
   }
 
-  const nameHandle = (givenName) => {
-    setUsername(givenName)
-  }
-
   const passHandle = (givenPass) => {
     setPassword(givenPass)
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, token, tokenize, username, nameHandle, password, passHandle, email, emailHandle }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, token, tokenize, password, passHandle, email, emailHandle }}>
       {children}
     </AuthContext.Provider>
   );

@@ -5,10 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function Register() {
-  const [fullName, setFullName] = useState("");
-  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [country, setCountry] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
@@ -20,10 +17,7 @@ function Register() {
       const response = await axios.post(
         "http://localhost:8000/user/createUser",
         {
-          fullName,
-          userName,
           email,
-          country,
           password,
         }
       );
@@ -59,27 +53,6 @@ function Register() {
               <label htmlFor="fullName" className="attr">
                 Full Name:
               </label>
-              <input
-                type="text"
-                className="form-control"
-                name="fullName"
-                id="fullName"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="userName" className="attr">
-                Username:
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                name="userName"
-                id="userName"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
             </div>
             <div className="form-group">
               <label htmlFor="email" className="attr">
@@ -93,19 +66,6 @@ function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="country" className="attr">
-                Country:
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                name="country"
-                id="country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
               />
             </div>
             <div className="form-group">

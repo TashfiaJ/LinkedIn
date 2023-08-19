@@ -39,4 +39,4 @@ def login(request:OAuth2PasswordRequestForm = Depends(),
                             detail=f"Invalid password Credentials")
 
     access_token = JWTtoken.create_access_token(data={"sub": user.email})
-    return {"access_token": access_token, "token_type": "bearer", "username": user.userName}
+    return {"access_token": access_token, "token_type": "bearer"}

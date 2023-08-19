@@ -34,7 +34,7 @@ function Post() {
 
   const createPost = async (imageData) => {
     const postData = {
-      username: authContext.username,
+      email: authContext.email,
       content: content,
       image: imageData,
     };

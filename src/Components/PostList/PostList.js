@@ -39,7 +39,7 @@ function PostsList({ key }) { // Accept the key prop
                 <div className="post-content">
                   <div className="d-flex justify-content-between">
                     <h5 className="mb-1">
-                      <span className="text-bold text-xtra" style={{ color: '#FF914D' }}>{post.username}</span>
+                      <span className="text-bold text-xtra" style={{ color: '#FF914D' }}>{post.email}</span>
                     </h5>
                     <small>{post.created_at}</small>
                   </div>
