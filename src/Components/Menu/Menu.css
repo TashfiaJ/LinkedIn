@@ -1,0 +1,21 @@
+.link-decoration {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    padding-top: 30px;
+    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+}
+
+.link-decoration:hover {
+    text-decoration: none;
+    transform: scale(1.01);
+    transition: all ease 0.5s;
+    opacity: 0.6;
+}
+
+.real-nav-menu {
+    margin-left: 65px;
+}

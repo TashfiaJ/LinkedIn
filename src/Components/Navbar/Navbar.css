@@ -1,0 +1,137 @@
+.home {
+    /* background-image: url(../../../public/main-bg.png); */
+    background-position: center;
+    background-size: cover;
+  }
+  
+  
+  .beauty {
+    float: left;
+  }
+  
+  .nav-menu {
+    margin-left: 120px;
+  }
+  
+  @keyframes glow5 {
+    0% {
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+    }
+  }
+  
+  @keyframes jump {
+    0%, 100% {
+      transform: translateY(-50px);
+    }
+    50% {
+      transform: translateY(-250px);
+    }
+  }
+  
+  .btn-dist {
+    -webkit-border-radius: 14;
+    -moz-border-radius: 14;
+    border-radius: 14px;
+    color: #E4DFDA;
+    font-size: 25px;
+    background: rgb(4,51,75);
+    background: radial-gradient(circle, rgba(4,51,75,1) 0%, rgba(0,0,0,1) 100%);  
+    padding: 10px 20px 10px 20px;
+    border: solid #E4DFDA 4px;
+    text-decoration: none;
+    width: 250px;
+    height: 80px;
+    margin-top: 20px;
+    margin-left: 105px;
+  }
+  
+  .btn-dist:hover {
+    background: rgb(228,223,218);
+    background: radial-gradient(circle, rgba(228,223,218,1) 0%, rgba(4,51,75,1) 100%);  
+    border: solid #E4DFDA 4px;
+    text-decoration: none;
+    color: #000;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+  
+  #logo-img {
+    margin-left: 100px;
+    margin-top: 90px;
+    opacity: 0.8;
+  }
+  
+  .login-btn {
+    color: #FF914D;
+    font-weight: 600;
+    font-size: 20px;
+    background: none;
+    border: none;
+    float: right;
+    margin-right: 40px;
+    margin-top: 20px;
+  }
+  
+  .login-btn:hover {
+    opacity: 0.6;
+    color: #ADB6C4;
+    transition: all ease 0.5s;
+    opacity: 0.6;
+  }
+  
+  .btn-xtra {
+    color: #fff;
+    background-color: #FF914D;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+    border-radius: 20%;
+    float: right;
+    margin-right: 40px;
+    margin-top: 20px;
+  }
+  
+  .btn-xtra:hover {
+    color: #fff;
+    background-color: #ADB6C4;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+    border-radius: 20%;
+    float: right;
+    margin-right: 40px;
+    margin-top: 20px;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+  
+  .head-main {
+    color: #FF914D;
+    font-weight: 700;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+  
+  .real-nav {
+    float: right;
+  }
+  
+  .sync-btn {
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 20px;
+    padding-top: 30px;
+    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+    color: white;
+  }
+  
+  .menuuuu{
+    position: relative;
+    top:-30px;
+  }

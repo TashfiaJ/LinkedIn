@@ -1,0 +1,40 @@
+
+    
+    .bg{
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+        background-position: center;
+        position: relative;
+      }
+      
+      .login-no-overlay {
+        position: relative;
+        z-index: 1; /* Bring the content above the overlay */
+      }
+  
+      .arrow-back-btn {
+        position: absolute;
+        top: 10px;
+        left: -650px;
+      } 
+  
+      .reg{
+          color: #000000;
+          margin-top: 10px;
+          margin-right: 140px;
+      }
+      
+      .regtxt{
+          color: #FF914D;
+          text-decoration: underline;
+      }
+  
+      .regtxt:hover{
+          color: #224ec0;
+      }
+  
+      .planet-container {
+        margin-top: 70px;
+      }
+      

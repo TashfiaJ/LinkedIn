@@ -1,0 +1,60 @@
+.posts-list {
+    text-align: left;
+    margin-left: 150px;
+}
+
+.text-xtra {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.card-text-xtra {
+    text-decoration: none;
+    color: #000;
+}
+
+.card-text-xtra:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.notification-card:hover {
+    background-color: #FF914D;
+}
+
+.notification-card p:hover {
+    color: #fff;
+}
+
+.p-xtra {
+    color: #FF914D;
+}
+
+.post-form {
+    /* background-image: url(../../../public/newx.png); */
+    background-repeat: no-repeat;
+    background-size: auto 100vh; /* Adjust width to fit the aspect ratio, height 100vh */
+    background-position: center;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .notification-box {
+    display: inline-block;
+    position: relative;
+    margin-left: 20px; /* Add left margin */
+  }
+  
+  .notification-counter {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 15px;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a shadow for the alert effect */
+  }
+  
+  
