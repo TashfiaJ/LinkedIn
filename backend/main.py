@@ -53,6 +53,23 @@ class PostCreate(BaseModel):
     image: str = None
 
 
+# scheduler = BackgroundScheduler()
+
+# # ...
+
+# # Add the notification cleaner job
+# def clean_notifications():
+#     ten_seconds_ago = datetime.now() - timedelta(seconds=10)
+#     query = "DELETE FROM notifications WHERE created_at <= ?"
+#     c = app.state.conn.cursor()
+#     c.execute(query, (ten_seconds_ago,))
+#     app.state.conn.commit()
+
+# # Schedule the notification cleaner job to run every 10 seconds
+# scheduler.add_job(clean_notifications, 'interval', seconds=10)
+# scheduler.start()
+
+
 @app.on_event("startup")
 async def startup():
     # Connect to the SQLite database
@@ -73,18 +90,6 @@ async def startup():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
-    clean_notifications()
-
-# # Add the notification cleaner job
-def clean_notifications(db: Session = Depends(database.get_db)):
-    ten_seconds_ago = datetime.now() - timedelta(seconds=10)
-    delete_query = "DELETE FROM notifications WHERE created_at <= :time_limit"
-    db.execute(delete_query, {"time_limit": ten_seconds_ago})
-    db.commit()
-
-# Start the scheduler
-scheduler.add_job(clean_notifications, 'interval', seconds=10)
-scheduler.start()
 
 
 @app.on_event("shutdown")
