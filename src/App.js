@@ -9,6 +9,7 @@ import Post from './Components/Post/Post';
 import PostsList from './Components/PostList/PostList';
 import Notification from './Components/Notification/Notification';
 import DetailedPost from './Components/DetailedPost/DetailedPost';
+import PostMain from './Components/Post/PostMain'
 
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
     
       <Route path="*" element={<div><p className="text-light">Page Not Found!</p></div>} />
    
-      <Route path="/post" element={<Post />} />
+      <Route path="/post" element={<PostMain />} />
       <Route path="/postList" element={<PostsList />} />
       <Route path="/notification" element={<Notification/>} />
       <Route path="/posts/:postId" element={<DetailedPost/>} />

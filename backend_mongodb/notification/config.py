@@ -4,10 +4,7 @@ from pymongo import MongoClient
 client = MongoClient("mongodb://localhost:27017/")
 
 # Select the database 
-db = client["mydatabase_post"]
+db = client["mydatabase_notification"]
 
-# Create a reference to the "post" collection 
-user_collection = db["post"]
-
-
-
+# Create a reference to the "user" collection 
+user_collection = db["notification"]

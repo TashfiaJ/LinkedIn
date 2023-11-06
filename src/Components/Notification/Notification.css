@@ -1,0 +1,18 @@
+.notifications-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .notifications-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .notification {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 5px #888888;
+  }
+  

@@ -1,10 +1,16 @@
+import time
 from fastapi import APIRouter, HTTPException, UploadFile, Form, File
-from datetime import datetime, timezone
+from pydantic import BaseModel
+from datetime import datetime
 from minio import Minio
 import io
 import uuid
+import pytz
+
+
+import requests
 from config import user_collection, db
-from model import POSTS
+from model import POSTS, PostCreation
 from schema import postSchema, postsSchema
 from bson import ObjectId
 import json
@@ -21,14 +27,17 @@ async def startup():
     # RabbitMQ connection code has been removed
     pass
 
-@router.get("/post", response_model=list[POSTS])
-def get_posts():
+@router.get("/getpost", response_model=list[POSTS])
+def get_posts(user_id: str):
+    print(user_id)
     try:
-        posts = user_collection.find()
+        # Filter out posts by the logged-in user
+        posts = user_collection.find({"username": {"$ne": user_id}})
         post_list = postsSchema(posts)
         return post_list
     except Exception as error:
         raise HTTPException(status_code=500, detail="Internal server error")
+
 
 @router.get('/post/{postId}', response_model=POSTS)
 async def get_post(postId: str):
@@ -41,12 +50,13 @@ async def get_post(postId: str):
         print(error)
         raise HTTPException(status_code=500, detail="Internal server error")
 
+
 @router.post("/post")
-async def add_post(username: str = Form(None),
-                   texts: str = Form(None),
-                   image_file: UploadFile = File(None)):
+async def add_post(username: str=Form(None),
+    texts: str = Form(None),
+    image_file: UploadFile = File(None)):
     try:
-        image_url = ""
+        image_url=""
         if image_file:
             image_url = await upload_image(image_file, username)
         result = user_collection.insert_one({
@@ -56,16 +66,41 @@ async def add_post(username: str = Form(None),
         })
         post_id = result.inserted_id
 
-        # Create notification message (excluding RabbitMQ related code)
+        # Create notification message
         message = "Added an image!"
         if texts:
             message = texts[:70]
 
-        # Connection and channel creation for RabbitMQ have been removed
+        # Calculate time elapsed
+        # post_timestamp = result.inserted_id.generation_time.replace(tzinfo=pytz.utc)
+
+        # current_time = datetime.now(pytz.utc).isoformat()
+        current_time = time.time()
+        print("curr", current_time)
+
+        # time_elapsed = (current_time - post_timestamp).total_seconds() / 60  # in minutes
+
+        # Create the notification message
+        # message = f"{username} has posted {int(time_elapsed)} minutes ago"
+
+        # Send a request to the Notification Microservice
+        notification_data = {
+            "username": username,
+            "timeStamp": current_time,
+        }
+        notification_api_url = "http://localhost:1024/create_notification"  # Replace with the actual URL of the Notification Microservice
+        response = requests.post(notification_api_url, json=notification_data)
+
+        if response.status_code == 200:
+            print("Notification created successfully")
+        else:
+            print("Failed to create notification")
+
 
     except Exception as error:
         print(error)
         raise HTTPException(status_code=500, detail="Internal server error")
+    return {"message": "Post created successfully"}
 
 # Define your proxy configuration (assuming this is needed for Minio)
 proxy_host = 'minio'
@@ -108,3 +143,4 @@ async def upload_image(imgFile, username: str):
     presigned_url = minio_client.presigned_get_object('linkedin', unique_filename)
     print(presigned_url)
     return presigned_url
+

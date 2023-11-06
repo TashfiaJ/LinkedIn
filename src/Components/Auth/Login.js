@@ -73,6 +73,7 @@ const Message = styled.p`
 `;
 
 function LoginForm() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -83,19 +84,32 @@ function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("username", email);
+    formData.append("username", username);
+    formData.append("email", email);
     formData.append("password", password);
-    fetch("http://localhost:8000/login/", {
+    const requestData = {
+      username,
+      email,
+      password,
+    };
+    const requestDataJSON = JSON.stringify(requestData);
+    fetch("http://localhost:8080/user/login", {
       method: "POST",
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json', // Set the content type to JSON
+      },
+      body: requestDataJSON, 
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.access_token);
         if (data.access_token) {
           authContext.tokenize(data.access_token)
+          authContext.usernameHandle(username);
           authContext.emailHandle(email);
           authContext.passHandle(password);
           setMessage("Login successful!");
+          console.log(authContext.email);
           setIsLogin(true)
           authContext.login();
           setTimeout(() => {
@@ -126,6 +140,15 @@ function LoginForm() {
       <div className="login-no-overlay">
         <FormContainer>
           <Form onSubmit={handleSubmit}>
+          <Label>
+              Username:
+              <Input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </Label>
             <Label>
               Email:
               <Input
@@ -165,13 +188,6 @@ function LoginForm() {
             <span className="regtxt">Forgot Your Password?</span>
           </Link>
         </div> */}
-      </div>
-      <div className="row">
-      <div className="col-6 planet-prev">
-        <div className="planet-container">
-        <img src="./bg.png" alt="planet" width="800px"/>
-        </div>
-      </div>
       </div>
     </Container>
     </>

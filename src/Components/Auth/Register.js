@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function Register() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -15,8 +16,9 @@ function Register() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/user/createUser",
-        {
+        "http://localhost:8000/user/create",
+        { 
+          username,
           email,
           password,
         }
@@ -43,16 +45,27 @@ function Register() {
   };
 
   return (
-    <div className="container-fluid register-bg">
+    <div className="container-fluid register-bg" style={{ backgroundColor: "#2EB5D0" }}>
       <div className="row" >
         <div className="col-1"></div>
+        <div className="col-10 center-container">
         <div className="col-5 box1">
           <h3 className="pop">Register Form</h3>
           <form className="form-container" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="fullName" className="attr">
-                Full Name:
+              <label htmlFor="username" className="attr">
+                Username:
               </label>
+              <input
+                type="text"
+                className="form-control"
+                name="username"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                style={{ marginBottom: "15px" }}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="email" className="attr">
@@ -66,6 +79,7 @@ function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                style={{ marginBottom: "15px" }}
               />
             </div>
             <div className="form-group">
@@ -96,6 +110,7 @@ function Register() {
           </form>
           <div className='reg'> 
            Already have an account? <Link to='/login'><span className='regtxt2'>Login Now!</span></Link>
+        </div>
         </div>
         </div>
         <div className="col-6">

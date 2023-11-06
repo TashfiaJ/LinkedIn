@@ -1,66 +1,71 @@
-.pop{
-    color: #FF914D;
-    margin-right: 30  0px;
-    margin-bottom: 20px;
+/* LinkedIn-like styling */
+
+.pop {
+  color: #2867B2; /* LinkedIn blue */
+  margin-right: 30px;
+  margin-bottom: 20px;
 }
 
-.box1{
-    margin-top: 70px;  
-}
-.register-bg{
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    background-position: center;
-    position: relative;
-  }
-  
-  .login-no-overlay {
-    position: relative;
-    z-index: 1; /* Bring the content above the overlay */
-  }
-
-.attr{
-    color: #000
+/* Add a container for centering */
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
 
-.regtxt2 {
-    color: #FF914D;
-    text-decoration: underline;
-  margin-right: 70px;
+.box1 {
+  margin-top: 10px;
 }
 
-.regtxt2:hover {
-    color: #224ec0;
-}
-
-.cutie{
-    -webkit-border-radius: 14;
-    -moz-border-radius: 14;
-    border-radius: 14px;
-    color: #000;
-    font-size: 16px;
-    padding: 10px 20px 10px 20px;
-    border: solid #E4DFDA 4px;
-    text-decoration: none;
-    width: 100px;
-    height: 50px;
-    margin-top: 20px;
-    margin-left: 8px;
-}
-
-.imagee{
-    /* background-image: url(../../../public/green.gif); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 50vh;
+.register-bg {
+ /* background-image: url('your-background-image.jpg'); Replace with your image URL */
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
   background-position: center;
-  margin-top: 150px;
+  position: relative;
+  z-index: 1;
 }
 
-.form-container{
-    width: 400px;
-    padding: 40px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+.form-container {
+  width: 400px;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
+
+.attr {
+  color: #000;
+}
+
+.cutie {
+  -webkit-border-radius: 14;
+  -moz-border-radius: 14;
+  border-radius: 14px;
+  color: #fff; /* White text */
+  font-size: 16px;
+  padding: 10px 20px;
+  border: solid #2867B2 4px; /* LinkedIn blue border */
+  text-decoration: none;
+  width: 100px;
+  height: 50px;
+  margin-top: 20px;
+  margin-left: 8px;
+  background-color: #2867B2; /* LinkedIn blue background */
+}
+
+.cutie:hover {
+  border: solid #224ec0 4px; /* Darker blue border on hover */
+  background-color: #224ec0; /* Darker blue background on hover */
+}
+
+.error-message {
+  color: #ff0000; /* Red error message */
+}
+
+.success-message {
+  color: #008000; /* Green success message */
+}
+
+/* Add any additional LinkedIn-like styling as needed */
