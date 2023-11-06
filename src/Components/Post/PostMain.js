@@ -48,7 +48,9 @@ function Home() {
       {authContext.isLoggedIn ? (
                 <div className="user-info">
                 <button onClick={authContext.logout}>Logout</button>
+                <Link to='/timeline'>
                 <button className="username-button"> {authContext.username} </button>
+                </Link>
               </div>
       ) : (
         <div>
@@ -57,7 +59,8 @@ function Home() {
             </Link>
             </div>
       )}
-
+      {authContext.isLoggedIn && (
+      <div>
       <div className="post-section">
         <h2>Create a New Post</h2>
         <div className="post-input-container">
@@ -72,8 +75,6 @@ function Home() {
           <button onClick={handlePostSubmit}>Post</button>
         </div>
       </div>
-
-      {authContext.isLoggedIn && (
         <div>
         <div>
         <Link to="/notification">
@@ -84,6 +85,7 @@ function Home() {
           <h2>Recent Posts</h2>
           <PostList />
         </div>
+      </div>
       </div>
       )}
     </div>

@@ -1,3 +1,4 @@
+from datetime import datetime
 import time
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from config import user_collection, db
@@ -31,37 +32,42 @@ def get_notifications(user_id: str):
         filtered_notifications = user_collection.find({"username": {"$ne": user_id}})
         notification_list = list(filtered_notifications)
 
-        current_timestamp = int(time.time())  # Get the current timestamp in seconds
+        current_timestamp = datetime.now()  # Get the current timestamp in seconds
         formatted_messages = []
 
         for notification in notification_list:
             timestamp = notification["timeStamp"]
-            timestamp_seconds = int(timestamp.timestamp())  # Convert the timestamp to seconds
-            time_elapsed = current_timestamp - timestamp_seconds
-            minutes_elapsed = time_elapsed // 60
+            # timestamp_seconds = int(timestamp.timestamp())  # Convert the timestamp to seconds
+            print("timestamp", timestamp)
+            # print("timestamp-second", timestamp_seconds)
+            print("current_time", current_timestamp)
+            time_elapsed = (current_timestamp.timestamp() - timestamp.timestamp())
+            print("Time_elapsed", time_elapsed)
+            minutes_elapsed = int(time_elapsed // 60)
+            print("minutes_elapsed", minutes_elapsed)
             formatted_message = f"{notification['username']} has posted {minutes_elapsed} minutes ago"
             formatted_messages.append(formatted_message)
 
         return formatted_messages
     except Exception as error:
+        print(error)
         raise HTTPException(status_code=500, detail="Internal server error")
 
 def delete_old_notifications():
     # Get all notifications from the collection
-    all_notifications = user_collection.find()
-    current_timestamp = int(time.time())  # Get the current timestamp in seconds
+    all_notifications = user_collection.find()  # Get the current timestamp in seconds
     deleted_count = 0
 
     for notification in all_notifications:
         timestamp = notification["timeStamp"]
-        timestamp_seconds = int(timestamp.timestamp())  # Convert the timestamp to seconds
-        time_elapsed = current_timestamp - timestamp_seconds
-        minutes_elapsed = time_elapsed // 60
-        print("noti", current_timestamp)
-        print("ts", timestamp_seconds)
-        if minutes_elapsed >= 30:
+        current_timestamp = datetime.now()
+        time_elapsed = current_timestamp.timestamp() - timestamp.timestamp()
+        minutes_elapsed = int(time_elapsed // 60)
+        # print("noti", current_timestamp)
+        # print("ts", timestamp_seconds)
+        if minutes_elapsed >= 10:
             # Delete the notification if it's older than 30 minutes
-            # user_collection.delete_one({"_id": notification["_id"]})
+            user_collection.delete_one({"_id": notification["_id"]})
             deleted_count += 1
 
     print(f"Deleted {deleted_count} notifications older than 30 minutes")

@@ -10,6 +10,7 @@ import PostsList from './Components/PostList/PostList';
 import Notification from './Components/Notification/Notification';
 import DetailedPost from './Components/DetailedPost/DetailedPost';
 import PostMain from './Components/Post/PostMain'
+import Timeline from './Components/Post/Timeline'
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
       <Route path="/post" element={<PostMain />} />
       <Route path="/postList" element={<PostsList />} />
       <Route path="/notification" element={<Notification/>} />
+      <Route path="/timeline" element={<Timeline/>} />
       <Route path="/posts/:postId" element={<DetailedPost/>} />
 
 

@@ -86,14 +86,14 @@ function PostList() {
     // Check if the user is available
     if (user ) {
       setUsername(user);
+      fetchData(user);
     }
   }, []);
 
-  useEffect(() => {
     // Fetch recent posts excluding the logged-in user's posts
-    const fetchData = async () => {
+    const fetchData = async (username) => {
       try {
-        const response = await axios.get(`http://localhost:8000/getpost?username=${username}`, { },
+        const response = await axios.get(`http://localhost:8000/getpost?user_id=${username}`, { },
         );
         const posts = response.data;
         console.log(posts);
@@ -104,8 +104,7 @@ function PostList() {
       }
     };
 
-    fetchData();
-}, []);
+ 
 // The empty dependency array ensures this effect runs only once on component mount
 
   return (

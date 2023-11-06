@@ -28,14 +28,29 @@ async def startup():
     pass
 
 @router.get("/getpost", response_model=list[POSTS])
-def get_posts(user_id: str):
-    print(user_id)
+async def get_posts(user_id: str):
+    # print(user_id)
     try:
         # Filter out posts by the logged-in user
         posts = user_collection.find({"username": {"$ne": user_id}})
         post_list = postsSchema(posts)
+        # print(post_list)
         return post_list
     except Exception as error:
+        print(error)
+        raise HTTPException(status_code=500, detail="Internal server error")
+    
+@router.get("/gettimeline", response_model=list[POSTS])
+async def get_timeline(user_id: str):
+    print(user_id)
+    try:
+        # Filter out posts by the logged-in user
+        posts = user_collection.find({"username": user_id})
+        post_list = postsSchema(posts)
+        print(post_list)
+        return post_list
+    except Exception as error:
+        print(error)
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
@@ -75,7 +90,7 @@ async def add_post(username: str=Form(None),
         # post_timestamp = result.inserted_id.generation_time.replace(tzinfo=pytz.utc)
 
         # current_time = datetime.now(pytz.utc).isoformat()
-        current_time = time.time()
+        current_time = datetime.now().isoformat()
         print("curr", current_time)
 
         # time_elapsed = (current_time - post_timestamp).total_seconds() / 60  # in minutes
