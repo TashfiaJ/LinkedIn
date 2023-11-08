@@ -5,13 +5,12 @@ from config import user_collection, db
 from schema import notificationsEntity
 from apscheduler.schedulers.background import BackgroundScheduler
 from model import Notification
-import aio_pika
 import json
 import asyncio
 
 router = APIRouter()
 
-@router.post("/create_notification")
+@router.post("/notification/create_notification")
 def create_notification(notification: Notification):
     print(notification)
     try:
@@ -25,7 +24,7 @@ def create_notification(notification: Notification):
         print(error)
         return {"message": "Failed to create notification"}
 
-@router.get("/get_notification", response_model=list[str])
+@router.get("/notification/get_notification", response_model=list[str])
 def get_notifications(user_id: str):
     print(user_id)
     try:
@@ -72,7 +71,7 @@ def delete_old_notifications():
 
     print(f"Deleted {deleted_count} notifications older than 30 minutes")
 
-@router.get("/cleanup_notifications")
+@router.get("/notification/cleanup_notifications")
 def cleanup_notifications():
     # Schedule the cleanup task to run in the background
     delete_old_notifications()

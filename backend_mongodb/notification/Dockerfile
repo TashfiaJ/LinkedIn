@@ -8,5 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 1024
+EXPOSE 8000
+
 

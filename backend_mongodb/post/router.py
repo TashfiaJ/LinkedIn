@@ -27,7 +27,7 @@ async def startup():
     # RabbitMQ connection code has been removed
     pass
 
-@router.get("/getpost", response_model=list[POSTS])
+@router.get("/post/getpost", response_model=list[POSTS])
 async def get_posts(user_id: str):
     # print(user_id)
     try:
@@ -40,7 +40,7 @@ async def get_posts(user_id: str):
         print(error)
         raise HTTPException(status_code=500, detail="Internal server error")
     
-@router.get("/gettimeline", response_model=list[POSTS])
+@router.get("/post/gettimeline", response_model=list[POSTS])
 async def get_timeline(user_id: str):
     print(user_id)
     try:
@@ -66,7 +66,7 @@ async def get_post(postId: str):
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
-@router.post("/post")
+@router.post("/post/create")
 async def add_post(username: str=Form(None),
     texts: str = Form(None),
     image_file: UploadFile = File(None)):
@@ -103,7 +103,7 @@ async def add_post(username: str=Form(None),
             "username": username,
             "timeStamp": current_time,
         }
-        notification_api_url = "http://localhost:1024/create_notification"  # Replace with the actual URL of the Notification Microservice
+        notification_api_url = "http://notification-service:8000/notification/create_notification"  # Replace with the actual URL of the Notification Microservice
         response = requests.post(notification_api_url, json=notification_data)
 
         if response.status_code == 200:
@@ -134,8 +134,9 @@ http_client = ProxyManager(
 # Create a Minio client with the configured HTTP client
 minio_client = Minio(
     "127.0.0.1:9000",
-    access_key="C4CR3xqY1Kbl4Ci9EbM7",
-    secret_key="RnIiddTrNBOrVfbNlHsIckK1rAqmXeU8OR0NgJMb",
+    access_key="yZpTXyycRSsbRoOVrtkW",
+    secret_key="r9js58Oxh4ADIhRv49bhH7kCwRKBjoTsjgJ0fAw2",
+    http_client=http_client,  # Set the custom HTTP client with proxy settings
     secure=False  # Change to True if using HTTPS
 )
 
